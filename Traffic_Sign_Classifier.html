@@ -14411,44 +14411,60 @@ xwwBSeqYISBJHTMEJKlj/x+x18uvIIl9LAAAAABJRU5ErkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Preprocess-the-data-here.-It-is-required-to-normalize-the-data.-Other-preprocessing-steps-could-include">Preprocess the data here. It is required to normalize the data. Other preprocessing steps could include<a class="anchor-link" href="#Preprocess-the-data-here.-It-is-required-to-normalize-the-data.-Other-preprocessing-steps-could-include">&#182;</a></h3><h3 id="converting-to-grayscale,-etc.">converting to grayscale, etc.<a class="anchor-link" href="#converting-to-grayscale,-etc.">&#182;</a></h3><h3 id="Feel-free-to-use-as-many-code-cells-as-needed.">Feel free to use as many code cells as needed.<a class="anchor-link" href="#Feel-free-to-use-as-many-code-cells-as-needed.">&#182;</a></h3><p>x_train, y_train = train['features'], train['labels']
-x_valid, y_valid = valid['features'], valid['labels']
-x_test, y_test = test['features'], test['labels']</p>
-<p>import copy</p>
-<h1 id="x_train2-=-copy.copy(x_train)">x_train2 = copy.copy(x_train)<a class="anchor-link" href="#x_train2-=-copy.copy(x_train)">&#182;</a></h1><p>x_train2 = np.empty([34799, 32, 32])
-x_valid2 = np.empty([4410, 32, 32])
-x_test2  = np.empty([12630, 32, 32])</p>
-<h1 id="x_train3-=-x_train">x_train3 = x_train<a class="anchor-link" href="#x_train3-=-x_train">&#182;</a></h1><p>IMG_SIZE = 32</p>
-<p>print(np.shape(x_train2))
-plt.imshow(x_train[0])
-plt.show()</p>
-<p>counter = 0
-for sign in x_train:</p>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Preprocess the data here. It is required to normalize the data. Other preprocessing steps could include </span>
+<span class="c1">### converting to grayscale, etc.</span>
+<span class="c1">### Feel free to use as many code cells as needed.</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">],</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+<span class="n">x_valid</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">valid</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">],</span> <span class="n">valid</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
 
-<pre><code>#if counter &lt; 1:
-x_train2[counter] = preprocess_img(sign)
-counter = counter + 1
+<span class="kn">import</span> <span class="nn">copy</span>
 
+<span class="c1">#x_train2 = copy.copy(x_train)</span>
+<span class="n">x_train2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">34799</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="n">x_valid2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">4410</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="n">x_test2</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">12630</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="c1">#x_train3 = x_train</span>
+<span class="n">IMG_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
 
-</code></pre>
-<p>counter = 0
-for sign in x_valid:
-    x_valid2[counter] = preprocess_img(sign)
-    counter = counter + 1</p>
-<p>counter = 0
-for sign in x_test:
-    x_test2[counter] = preprocess_img(sign)
-    counter = counter + 1</p>
-<h1 id="x_train2-=-preprocess_img(x_train2)">x_train2 = preprocess_img(x_train2)<a class="anchor-link" href="#x_train2-=-preprocess_img(x_train2)">&#182;</a></h1><h1 id="x_train2[:]-=-[preprocess_img(imagen)-for-imagen-in-x_train]">x_train2[:] = [preprocess_img(imagen) for imagen in x_train]<a class="anchor-link" href="#x_train2[:]-=-[preprocess_img(imagen)-for-imagen-in-x_train]">&#182;</a></h1><h1 id="np.apply_along_axis(preprocess_img,-arr=x_train2,-axis-=-1)">np.apply_along_axis(preprocess_img, arr=x_train2, axis = 1)<a class="anchor-link" href="#np.apply_along_axis(preprocess_img,-arr=x_train2,-axis-=-1)">&#182;</a></h1><p>plt.imshow(x_train2[0])
-plt.show()</p>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x_train2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">sign</span> <span class="ow">in</span> <span class="n">x_train</span><span class="p">:</span>
+    <span class="c1">#if counter &lt; 1:</span>
+    <span class="n">x_train2</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">preprocess_img</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+    
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">sign</span> <span class="ow">in</span> <span class="n">x_valid</span><span class="p">:</span>
+    <span class="n">x_valid2</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">preprocess_img</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+    
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">sign</span> <span class="ow">in</span> <span class="n">x_test</span><span class="p">:</span>
+    <span class="n">x_test2</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">preprocess_img</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+    
+<span class="c1">#x_train2 = preprocess_img(x_train2)</span>
+<span class="c1">#x_train2[:] = [preprocess_img(imagen) for imagen in x_train]</span>
+<span class="c1">#np.apply_along_axis(preprocess_img, arr=x_train2, axis = 1)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -14833,7 +14849,9 @@ AAAASUVORK5CYII=
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">conv_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="n">num_of_input_channel</span><span class="p">,</span><span class="n">filter_shape</span><span class="p">,</span><span class="n">output_depth</span><span class="p">,</span><span class="n">max_pooling</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Functions here courtesy of aruntayal</span>
+
+<span class="k">def</span> <span class="nf">conv_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="n">num_of_input_channel</span><span class="p">,</span><span class="n">filter_shape</span><span class="p">,</span><span class="n">output_depth</span><span class="p">,</span><span class="n">max_pooling</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">):</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
     <span class="n">filter_shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter_shape</span><span class="p">,</span><span class="n">filter_shape</span><span class="p">,</span><span class="n">num_of_input_channel</span><span class="p">,</span><span class="n">output_depth</span><span class="p">]</span>
@@ -14877,49 +14895,10 @@ AAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lenet2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="c1"># Layer 1. Convolutional. Input = 32x32x1. Output = 14x14x6</span>
-    <span class="n">cnv_layer_1</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
-    
-    <span class="c1"># Layer 2 Convolutional. Input = 14x14x6. Output = 5x5x16</span>
-    <span class="n">cnv_layer_2</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">cnv_layer_1</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
-    <span class="n">drop_layer_2</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">cnv_layer_2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    
-    
-    <span class="c1"># Layer 3 Convolutional. Input = 14x14x6. Output = 5x5x16</span>
-    <span class="n">cnv_layer_3</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">drop_layer_2</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span>
-    <span class="n">drop_layer_3</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">cnv_layer_3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    
-    <span class="c1"># Layer 4 Convolutional. Input = 14x14x6. Output = 5x5x16</span>
-    <span class="n">cnv_layer_4</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">drop_layer_3</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">128</span><span class="p">)</span>
-    <span class="n">drop_layer_4</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">cnv_layer_4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    
-    <span class="c1"># Layer 3: Fully Connected. Input = 400. Output = 120.</span>
-    <span class="n">fc_1</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">drop_layer_4</span><span class="p">)</span>
-    <span class="n">fc_1</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">fc_1</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
-    <span class="n">drop_layer_3</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">fc_1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    <span class="c1"># Layer 4: Fully Connected. Input = 120. Output = 84.</span>
-    <span class="n">fc_2</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">drop_layer_3</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># Layer 5: Fully Connected. Input = 84. Output = 43.</span>
-    <span class="n">drop_layer_4</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">fc_2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    <span class="n">fc_3</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">drop_layer_4</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fc_3</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lenet3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lenet2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="c1"># Layer 1. Convolutional. Input = 32x32x1. Output = 14x14x6</span>
     <span class="n">cnv_layer_1</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="n">max_pooling</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">)</span>
     
@@ -14928,15 +14907,13 @@ AAAASUVORK5CYII=
     <span class="n">drop_layer_1</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">cnv_layer_3</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">)</span>
     
     <span class="n">cnv_layer_4</span> <span class="o">=</span> <span class="n">conv_layer</span><span class="p">(</span><span class="n">drop_layer_1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">128</span><span class="p">)</span>
-    <span class="n">drop_layer_2</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">cnv_layer_4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     
-    <span class="n">fc_1</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">drop_layer_2</span><span class="p">)</span>
+    <span class="n">fc_1</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">cnv_layer_4</span><span class="p">)</span>
     <span class="n">fc_1</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">fc_1</span><span class="p">,</span><span class="mi">8192</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
     
     <span class="n">fc_2</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">fc_1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
-    <span class="n">drop_layer_2</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">fc_2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     
-    <span class="n">fc_3</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">drop_layer_2</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fc_3</span> <span class="o">=</span> <span class="n">full_connection_layer</span><span class="p">(</span><span class="n">fc_2</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">drop_layer_3</span> <span class="o">=</span> <span class="n">dropout_layer</span><span class="p">(</span><span class="n">fc_3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">drop_layer_3</span>
 </pre></div>
@@ -15007,7 +14984,7 @@ AAAASUVORK5CYII=
 <span class="c1">#from keras import backend as K</span>
 <span class="c1">#K.set_image_dim_ordering(&#39;tf&#39;)</span>
 
-<span class="n">logits</span> <span class="o">=</span> <span class="n">lenet3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">lenet2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">cross_entropy</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax_cross_entropy_with_logits</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">one_hot_y</span><span class="p">,</span> <span class="n">logits</span><span class="o">=</span><span class="n">logits</span><span class="p">)</span>
 <span class="n">loss_operation</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">cross_entropy</span><span class="p">)</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">rate</span><span class="p">)</span>
@@ -23796,7 +23773,7 @@ rkJggg==
     <span class="n">hsv</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_hist</span><span class="p">(</span><span class="n">hsv</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">hsv2rgb</span><span class="p">(</span><span class="n">hsv</span><span class="p">)</span>
 
-    <span class="c1">#central scrop</span>
+    <span class="c1">#central crop</span>
     <span class="n">min_side</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">centre</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">//</span><span class="mi">2</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">centre</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">min_side</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span><span class="n">centre</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">min_side</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span>
@@ -24089,7 +24066,7 @@ a = np.array([[ 0.24879643,  0.07032244,  0.12641572,  0.34763842,  0.07893497,
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Print out the top five softmax probabilities for the predictions on the German traffic sign images found on the web. </span>
 <span class="c1">### Feel free to use as many code cells as needed.</span>
 
-<span class="n">logits</span> <span class="o">=</span> <span class="n">lenet3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">lenet2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1">#y_pred = tf.nn.softmax(logits)</span>
 
 <span class="n">tf_probs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">top_k</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
